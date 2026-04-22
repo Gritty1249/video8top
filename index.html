@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>我敲！是我最爱的CP哎！！！</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        video {
+            width: 100%;
+            height: 100vh;
+            object-fit: contain;
+            display: block;
+        }
+        /* 移动端全屏适配 */
+        @media (orientation: landscape) {
+            video {
+                object-fit: contain;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video id="myVideo" controls autoplay playsinline webkit-playsinline>
+        <source src="video.mp4" type="video/mp4">
+        您的浏览器不支持 video 标签。
+    </video>
+
+    <script>
+        // 获取视频元素
+        var video = document.getElementById('myVideo');
+        
+        // 尝试自动播放（处理移动端限制）
+        video.play().catch(function(error) {
+            console.log('自动播放失败，用户点击后播放');
+            // 添加一个简单提示，点击任意位置播放
+            document.body.addEventListener('touchstart', function playOnce() {
+                video.play();
+                document.body.removeEventListener('touchstart', playOnce);
+            });
+        });
+        
+        // 移动端横屏时显示全屏按钮（浏览器自带 controls 已有全屏按钮）
+        // 监听全屏变化
+        video.addEventListener('webkitbeginfullscreen', function() {
+            // 进入横屏全屏
+        });
+    </script>
+</body>
+</html>
